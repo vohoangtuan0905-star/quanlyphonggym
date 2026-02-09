@@ -1,5 +1,13 @@
-<?php session_start();
-require_once ('../csdl/helper.php');?>
+<?php 
+session_start();
+require_once ('../csdl/helper.php');
+
+// Nếu đã đăng nhập thì chuyển hướng tới trang chức năng
+if(isset($_SESSION['role']) && $_SESSION['role'] == 'staff' && isset($_SESSION['congviec'])) {
+    header('location:khachhang/index.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +27,7 @@ require_once ('../csdl/helper.php');?>
     
         <div id="loginbox">            
             <form id="loginform" method="POST" class="form-vertical" action="#">
-            <div class="control-group normal_text"> <h3><img src="../style/img/demo/logo.jpg" alt="Logo" /></h3></div>
+            <div class="control-group normal_text"> <h3><img src="..\style\img\logo.jpg" alt="Logo" /></h3></div>
                 <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">

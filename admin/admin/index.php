@@ -31,54 +31,54 @@ $result5=mysqli_query($con,$qry);
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawStuff);
+          // Responsive Google Chart for top_x_div
+          google.charts.load('current', {'packages':['bar']});
 
-      function drawStuff() {
-        var data = new google.visualization.arrayToDataTable([
-          ['', 'Số khách hàng sử dụng'],
+          function drawChartTopX() {
+            var container = document.getElementById('top_x_div');
+            if (!container) return;
 
-          <?php
-            $query="SELECT Kehoach, count(*) as number FROM khachhang GROUP BY Kehoach";
-            $res=mysqli_query($con,$query);
-            while($data=mysqli_fetch_array($res)){
-              $Kehoach=$data['Kehoach'];
-              $number=$data['number'];
-           ?>
-           ['<?php echo $Kehoach;?>',<?php echo $number;?>],   
-           <?php   
-            }
-           ?> 
+            var data = new google.visualization.arrayToDataTable([
+              ['', 'Số khách hàng sử dụng'],
 
-          
-        ]);
+              <?php
+                $query="SELECT Kehoach, count(*) as number FROM khachhang GROUP BY Kehoach";
+                $res=mysqli_query($con,$query);
+                while($data=mysqli_fetch_array($res)){
+                  $Kehoach=$data['Kehoach'];
+                  $number=$data['number'];
+               ?>
+               ['<?php echo $Kehoach;?>',<?php echo $number;?>],   
+               <?php   
+                }
+               ?> 
 
-        var options = {
+            ]);
 
-          width: 710,
-          legend: { position: 'none' },
+            // compute responsive width/height based on container
+            var w = container.clientWidth || 700;
+            var h = Math.max(180, Math.round(w * 0.45)); // keep reasonable aspect ratio on small screens
 
-          bars: 'vertical', 
-          axes: {
-            x: {
-              0: { side: 'top', label: 'Gói tập(tháng)'} 
-            }
-          },
-          bar: { groupWidth: "100%" }
-        };
+            var options = {
+              width: w,
+              height: h,
+              legend: { position: 'none' },
+              bars: 'vertical', 
+              axes: { x: { 0: { side: 'top', label: 'Gói tập(tháng)'} } },
+              bar: { groupWidth: "100%" }
+            };
 
-        var chart = new google.charts.Bar(document.getElementById('top_x_div'));
-        chart.draw(data, options);
-      };
-
-
-      
-    </script>
+            var chart = new google.charts.Bar(container);
+            chart.draw(data, options);
+          }
+        </script>
 
 <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawStuff);
-      function drawStuff() {
+      // Responsive Google Chart for top_y_div
+      function drawChartTopY() {
+        var container = document.getElementById('top_y_div');
+        if (!container) return;
+
         var data = new google.visualization.arrayToDataTable([
           ['', 'Tổng tiền',],          
         <?php
@@ -117,22 +117,39 @@ $result5=mysqli_query($con,$qry);
             }
            ?>          
         ]);
+
+        var w = container.clientWidth || 700;
+        // For horizontal bars, limit height but allow growth on wide screens
+        var h = Math.max(140, Math.round(w * 0.25));
+
         var options = {
-         
-          width: "1050",
+          width: w,
+          height: h,
           legend: { position: 'none' },
-          
           bars: 'horizontal',
-          axes: {
-            x: {
-              0: { side: 'top', label: 'Số tiền '}
-            }
-          },
+          axes: { x: { 0: { side: 'top', label: 'Số tiền '} } },
           bar: { groupWidth: "100%" }
         };
-        var chart = new google.charts.Bar(document.getElementById('top_y_div'));
+
+        var chart = new google.charts.Bar(container);
         chart.draw(data, options);
-      };      
+      }
+
+      // draw charts after google charts loaded and redraw on resize (debounced)
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(function(){
+        drawChartTopX();
+        drawChartTopY();
+      });
+
+      var resizeTimer;
+      window.addEventListener('resize', function(){
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function(){
+          drawChartTopX();
+          drawChartTopY();
+        }, 200);
+      });
     </script>
 </head>
 <body>
@@ -169,7 +186,7 @@ $result5=mysqli_query($con,$qry);
         <div class="widget-content" >
           <div class="row-fluid">
             <div class="span8">
-              <div id="top_x_div" style="width: 700px; height: 290px;"></div>
+              <div id="top_x_div" style="width: 100%;"></div>
             </div>
             <div class="span4">
               <ul class="site-stats">
@@ -194,7 +211,7 @@ $result5=mysqli_query($con,$qry);
         <div class="widget-content" >
           <div class="row-fluid">
             <div class="span12">
-              <div id="top_y_div" style="width: 700px; height: 180px;"></div>
+              <div id="top_y_div" style="width: 100%;"></div>
             </div>            
           </div>
         </div>
@@ -270,10 +287,11 @@ $result5=mysqli_query($con,$qry);
 
 <style>
 #piechart {
-  width: 800px; 
-  height: 280px;  
-  margin-left:auto; 
-  margin-right:auto;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
 

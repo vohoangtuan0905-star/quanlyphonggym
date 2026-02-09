@@ -26,7 +26,7 @@
   <h1><a href="dashboard.html">Gym Admin</a></h1>
 </div>
 <?php include '../includes/topheader.php'?>
-<?php $page='suadichvu'; include '../includes/sidebar.php'?>
+<?php $page='suacongviec'; include '../includes/sidebar.php'?>
 <div id="content">
 <div id="content-header">
   <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="fas fa-home"></i> Home</a> <a href="#" class="tip-bottom">Quản lý thiết bị</a> <a href="#" class="current">Cập nhật thông tin</a> </div>
@@ -34,57 +34,67 @@
 </div>
 <form role="form" action="index.php" method="POST">
     <?php 
-            if(isset($_POST['Tendv'])){
-            $Tendv = $_POST["Tendv"];    
-            $Gia = $_POST["Gia"];
-            $id = $_POST['id'];
-            $qry = "update dichvu set Tendv='$Tendv', Gia ='$Gia' where id='$id'";
-            $result = mysqli_query($con,$qry);
-            if(!$result){
-                echo"<div class='container-fluid'>";
-                    echo"<div class='row-fluid'>";
-                    echo"<div class='span12'>";
-                    echo"<div class='widget-box'>";
-                    echo"<div class='widget-title'> <span class='icon'> <i class='fas fa-info'></i> </span>";
-                        echo"<h5>Error Message</h5>";
-                        echo"</div>";
-                        echo"<div class='widget-content'>";
-                            echo"<div class='error_ex'>";
-                            echo"<h1 style='color:maroon;'>Error 404</h1>";
-                            echo"<h3>Error occured while updating your details</h3>";
-                            echo"<p>Please Try Again</p>";
-                            echo"<a class='btn btn-warning btn-big'  href='edit-equipment.php'>Go Back</a> </div>";
-                        echo"</div>";
-                        echo"</div>";
-                    echo"</div>";
-                    echo"</div>";
-                echo"</div>";
-            }else {
+    if (isset($_POST['TenCV'])) {
+        // Retrieve form data
+        $TenCV = $_POST["TenCV"];    
+        $Tratien = $_POST["Tratien"];
+         $id = $_POST['id'];
 
-                echo"<div class='container-fluid'>";
-                    echo"<div class='row-fluid'>";
-                    echo"<div class='span12'>";
-                    echo"<div class='widget-box'>";
-                    echo"<div class='widget-title'> <span class='icon'> <i class='fas fa-info'></i> </span>";
-                        echo"<h5>Thông báo</h5>";
-                        echo"</div>";
-                        echo"<div class='widget-content'>";
-                            echo"<div class='error_ex'>";
-                            echo"<h1>Thành Công</h1>";
-                            echo"<h3>Chi tiết thành viên đã được cập nhật!</h3>";
-                            echo"<p>Các chi tiết yêu cầu được cập nhật. Vui lòng bấm vào nút để quay lại.</p>";
-                            echo"<a class='btn btn-inverse btn-big'  href='index.php'>Trở về</a> </div>";
-                        echo"</div>";
-                        echo"</div>";
-                    echo"</div>";
-                    echo"</div>";
-                echo"</div>";
-            }
+        // Prepare the SQL update query
+        $qry = "UPDATE congviec SET TenCV='$TenCV', Tratien='$Tratien' WHERE idCv='$id'";
+        $result = mysqli_query($con, $qry);
 
-            }else{
-                echo"<h3>YOU ARE NOT AUTHORIZED TO REDIRECT THIS PAGE. GO BACK to <a href='thietbi/index.php'> DASHBOARD </a></h3>";
-            }
-?>
+        if (!$result) {
+            // If the query fails, display an error message
+            echo "<div class='container-fluid'>";
+                echo "<div class='row-fluid'>";
+                    echo "<div class='span12'>";
+                        echo "<div class='widget-box'>";
+                            echo "<div class='widget-title'> <span class='icon'> <i class='fas fa-info'></i> </span>";
+                                echo "<h5>Error Message</h5>";
+                            echo "</div>";
+                            echo "<div class='widget-content'>";
+                                echo "<div class='error_ex'>";
+                                    echo "<h1 style='color:maroon;'>Error 404</h1>";
+                                    echo "<h3>An error occurred while updating your details</h3>";
+                                    echo "<p>Please try again</p>";
+                                    echo "<a class='btn btn-warning btn-big' href='edit-equipment.php'>Go Back</a>";
+                                echo "</div>";
+                            echo "</div>";
+                        echo "</div>";
+                    echo "</div>";
+                echo "</div>";
+            echo "</div>";
+        } else {
+            // If the query is successful, display a success message
+            echo "<div class='container-fluid'>";
+                echo "<div class='row-fluid'>";
+                    echo "<div class='span12'>";
+                        echo "<div class='widget-box'>";
+                            echo "<div class='widget-title'> <span class='icon'> <i class='fas fa-info'></i> </span>";
+                                echo "<h5>Thông báo</h5>";
+                            echo "</div>";
+                            echo "<div class='widget-content'>";
+                                echo "<div class='error_ex'>";
+                                    echo "<h1>Thành Công</h1>";
+                                    echo "<h3>Chi tiết công việc đã được cập nhật!</h3>";
+                                    echo "<p>Các chi tiết yêu cầu được cập nhật. Vui lòng bấm vào nút để quay lại.</p>";
+                                    echo "<a class='btn btn-inverse btn-big' href='index.php'>Trở về</a>";
+                                echo "</div>";
+                            echo "</div>";
+                        echo "</div>";
+                    echo "</div>";
+                echo "</div>";
+            echo "</div>";
+        }
+
+    } else {
+        // If no form data is set, show an unauthorized message
+        echo "<h3>YOU ARE NOT AUTHORIZED TO REDIRECT THIS PAGE. GO BACK to <a href='thietbi/index.php'> DASHBOARD </a></h3>";
+    }
+    ?>
+</form>
+
                                                                  
              </form>
          </div>

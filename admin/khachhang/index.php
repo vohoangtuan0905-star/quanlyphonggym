@@ -154,18 +154,28 @@ function resetMenu() {
 
 <script type="text/javascript">
 				function khach_hang_list(user_id) {
-					var option = confirm('Bạn có chắc chắn muốn xoá danh mục này không?')
+					// Tránh trường hợp click nhiều lần
+					if($(this).data('isDeleting')) {
+						return;
+					}
+
+					var option = confirm('Bạn có chắc chắn muốn xoá khách hàng này không?')
 					if(!option) {
 						return;
 					}
 
-					console.log(user_id)
+					// Đánh dấu đang xóa
+					$(this).data('isDeleting', true);
+
 					$.post('xoakhachhang.php', {
 						'user_id': user_id,
 						'action': 'delete'
 					}, function(data) {
-						location.reload()
-					})
+						location.reload();
+					}).fail(function() {
+						alert('Có lỗi xảy ra khi xóa khách hàng!');
+						$(this).data('isDeleting', false);
+					});
 				}
 			</script>
 </body>

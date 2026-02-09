@@ -62,25 +62,25 @@ while($row=mysqli_fetch_array($result)){
             <div class="control-group">
               <label class="control-label">Họ và tên :</label>
               <div class="controls">
-                <input type="text" class="span11" style="width:350px" name="Hoten" value='<?php echo $row['Hoten']; ?>' />
+                <input type="text" class="span11 responsive-inline" name="Hoten" value='<?php echo $row['Hoten']; ?>' />
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Tài khoản :</label>
               <div class="controls">
-                <input type="text" class="span11" name="Taikhoan" style="width:350px" value='<?php echo $row['Taikhoan']; ?>' />
+                <input type="text" class="span11 responsive-inline" name="Taikhoan" value='<?php echo $row['Taikhoan']; ?>' />
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Mật khẩu :</label>
               <div class="controls">
-                <input type="text" class="span11" style="width:350px" name="Matkhau" value='<?php echo $row['Matkhau']; ?>'  />
+                <input type="text" class="span11 responsive-inline" name="Matkhau" value='<?php echo $row['Matkhau']; ?>'  />
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Giới tính :</label>
               <div class="controls">
-              <select name="Gioitinh" required="required" id="select" style="width:350px">
+              <select name="Gioitinh" required="required" id="select" class="responsive-inline">
                   <option value="Male" selected="selected">Nam</option>
                   <option value="Female">Nữ</option>
                   <option value="Khác">Khác</option>
@@ -90,7 +90,7 @@ while($row=mysqli_fetch_array($result)){
             <div class="control-group">
               <label class="control-label">Ngày đăng ký :</label>
               <div class="controls">
-                <input type="date" name="Ngaybd" readonly style="width:350px" class="span11" value='<?php echo $row['Ngaybd']; ?>' />
+                <input type="date" name="Ngaybd" readonly class="span11 responsive-inline" value='<?php echo $row['Ngaybd']; ?>' />
                 <span class="help-block"></span></div>
             </div> 
         </div>
@@ -116,13 +116,13 @@ while($row=mysqli_fetch_array($result)){
             <div class="control-group">
               <label for="normal" class="control-label">Số điện thoại</label>
               <div class="controls">
-                <input type="number" id="mask-phone" style="width:350px" name="Sdt" value='<?php echo $row['Sdt']; ?>' class="span8 mask text">
+                <input type="number" id="mask-phone" name="Sdt" value='<?php echo $row['Sdt']; ?>' class="span8 mask text responsive-inline">
                 </div>
             </div>
             <div class="control-group">
               <label class="control-label">Địa chỉ :</label>
               <div class="controls">
-                <input type="text" class="span11" name="Diachi" style="width:350px" value='<?php echo $row['Diachi']; ?>' />
+                <input type="text" class="span11 responsive-inline" name="Diachi" value='<?php echo $row['Diachi']; ?>' />
               </div>
             </div>
           </div>
@@ -138,7 +138,7 @@ while($row=mysqli_fetch_array($result)){
               <label class="control-label">Dịch vụ đang sử dụng</label>
               <div class="controls">
                 <div class="input-append">
-                  <input type="text" value='<?php echo $row['Tendv']; ?>' name="id1" readonly style="width:350px" class="span11">
+                  <input type="text" value='<?php echo $row['Tendv']; ?>' name="id1" readonly class="span11 responsive-inline">
                   </div>
               </div>
             </div>  

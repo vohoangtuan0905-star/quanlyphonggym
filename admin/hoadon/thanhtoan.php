@@ -66,16 +66,16 @@ while($row=mysqli_fetch_array($result)){
                       <td><img src="../../style/img/demo/anime.jpg" alt="Gym Logo" width="175"></td>
                     </tr>
                     <tr>
-                      <td><h4>Gym Hoàng Sang</h4></td>
+                      <td><h4>Gym Hoàng Tuấn</h4></td>
                     </tr>
                     <tr>
-                      <td>Vinh - Nghệ An</td>
+                      <td>Hồ Chí Minh</td>
                     </tr>                   
                     <tr>
                       <td>Sđt : 0818940765</td>
                     </tr>
                     <tr>
-                      <td >Email: thaihoangsang612000@gmail.com</td>
+                      <td >Email: hoangtuan1234@gmail.com</td>
                     </tr>
                   </tbody>
                 </table>

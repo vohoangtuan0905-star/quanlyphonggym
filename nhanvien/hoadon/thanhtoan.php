@@ -67,16 +67,16 @@ while($row=mysqli_fetch_array($result)){
                       <td><img src="../../style/img/demo/anime.jpg" alt="Gym Logo" width="175"></td>
                     </tr>
                     <tr>
-                      <td><h4>Gym Hoàng Sang</h4></td>
+                      <td><h4>Gym Hoàng Tuấn</h4></td>
                     </tr>
                     <tr>
-                      <td>Vinh - Nghệ An</td>
+                      <td>Hồ Chí Minh</td>
                     </tr>                   
                     <tr>
-                      <td>Sđt : 0818940765</td>
+                      <td>Sđt: 0818940765</td>
                     </tr>
                     <tr>
-                      <td >Email: thaihoangsang612000@gmail.com</td>
+                      <td>Email: hoangtuan1234@gmail.com</td>
                     </tr>
                   </tbody>
                 </table>
@@ -89,24 +89,20 @@ while($row=mysqli_fetch_array($result)){
                     <tr>
                     <tr>
                       <td class="width30">Họ và tên:</td>
-                      <input type="hidden" name="Hoten">
                       <td class="width70"><strong><?php echo $row['Hoten']; ?></strong></td>
                     </tr>
                     <tr>
                       <td>Dịch vụ:</td>
-                      <input type="hidden" name="Dichvu">
                       <td><strong><?php echo $row['Tendv']; ?></strong></td>
                     </tr>
                     <tr>
                       <td>Tổng tiền dịch vụ:</td>
+                      <td><strong><?php echo number_format($row['Tongtien']); ?> VNĐ</strong></td>
                       <input type="hidden" name="Tongtien" value="<?php echo $row['Tongtien'];?>">
-                      <td><strong><?php echo $row['Tongtien']; ?></strong></td>
                     </tr>
-
                     <tr>
                       <td>Số tháng tập:</td>
-                      <input type="hidden" name="Kehoach" >
-                      <td><strong><?php echo $row['Kehoach']; ?></strong></td>
+                      <td><strong><?php echo $row['Kehoach']; ?> tháng</strong></td>
                     </tr>
                     
                     <tr>

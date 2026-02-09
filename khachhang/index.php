@@ -19,7 +19,7 @@ require_once ('../csdl/helper.php');?>
     
         <div id="loginbox">            
             <form id="loginform" method="POST" class="form-vertical" action="#">
-            <div class="control-group normal_text"> <h3><img src="../style/img/demo/logo.jpg" alt="Logo" /></h3></div>
+            <div class="control-group normal_text"> <h3><img src="..\style\img\logo.jpg" alt="Logo" /></h3></div>
                 <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">

@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": "../../.git"
+		},
+		{
+			"path": "../../.vscode"
+		},
+		{
+			"path": "../../admin"
+		},
+		{
+			"path": "../../csdl"
+		},
+		{
+			"path": "../../font-awesome"
+		},
+		{
+			"path": "../../khachhang"
+		},
+		{
+			"path": "../../nhanvien"
+		},
+		{
+			"path": ".."
+		}
+	]
+}

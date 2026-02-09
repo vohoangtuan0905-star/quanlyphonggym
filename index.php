@@ -19,7 +19,7 @@ require_once ('csdl/helper.php');?>
     
         <div id="loginbox">            
             <form id="loginform" method="POST" class="form-vertical" action="#">
-            <div class="control-group normal_text"> <h3><img src="style/img/demo/logo.jpg" alt="Logo" /></h3></div>
+            <div class="control-group normal_text"> <h3><img src="style\img\logo.jpg" alt="Logo" /></h3></div>
                 <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">
@@ -44,25 +44,40 @@ require_once ('csdl/helper.php');?>
                         $username = mysqli_real_escape_string($con, $_POST['user']);
                         $password = mysqli_real_escape_string($con, $_POST['pass']);
                         
-                        $query 		= mysqli_query($con, "SELECT * FROM admin WHERE password='$password' and username='$username'");
-                        $row		= mysqli_fetch_array($query);
-                        $num_row 	= mysqli_num_rows($query);
+                        // Kiểm tra đăng nhập admin
+                        $admin_query = mysqli_query($con, "SELECT * FROM admin WHERE password='$password' and username='$username'");
+                        $admin_row = mysqli_fetch_array($admin_query);
+                        $admin_count = mysqli_num_rows($admin_query);
                         
-                        if ($num_row > 0) 
-                            {			
-                                $_SESSION['user_id']=$row['user_id'];
-                                header('location:admin/admin/index.php');
-                                
-                            }
+                        // Kiểm tra đăng nhập nhân viên
+                        $staff_query = mysqli_query($con, "SELECT n.*, c.TenCV FROM nhanvien n JOIN congviec c ON n.congviec = c.idCv WHERE n.password='$password' AND n.username='$username'");
+                        $staff_row = mysqli_fetch_array($staff_query);
+                        $staff_count = mysqli_num_rows($staff_query);
+                        
+                        if ($admin_count > 0) 
+                        {			
+                            $_SESSION['user_id'] = $admin_row['user_id'];
+                            $_SESSION['role'] = 'admin';
+                            header('location:admin/admin/index.php');
+                            exit();
+                        }
+                        else if ($staff_count > 0)
+                        {
+                            $_SESSION['user_id'] = $staff_row['id'];
+                            $_SESSION['role'] = 'staff';
+                            $_SESSION['congviec'] = $staff_row['TenCV'];
+                            header('location:nhanvien/khachhang/index.php');
+                            exit();
+                        }
                         else
-                            {
-                                echo "<div class='alert alert-danger alert-dismissible' role='alert'>
-                                Invalid Username and Password
-                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                    <span aria-hidden='true'>&times;</span>
-                                </button>
-                                </div>";
-                            }
+                        {
+                            echo "<div class='alert alert-danger alert-dismissible' role='alert'>
+                            Tài khoản hoặc mật khẩu không đúng!
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                            </div>";
+                        }
                     }
             ?>
             <div class="pull-left">

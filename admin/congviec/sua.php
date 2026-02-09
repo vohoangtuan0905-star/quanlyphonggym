@@ -2,7 +2,7 @@
 session_start();
 require_once ('../../csdl/helper.php');
 if(!isset($_SESSION['user_id'])){
-header('location:../index.php');	
+    header('location:../index.php');    
 }
 ?>
 
@@ -28,46 +28,44 @@ header('location:../index.php');
 </div>
 
 <?php include '../includes/topheader.php'?>
-<?php $page='suadichvu'; include '../includes/sidebar.php'?>
-    <?php
-        $id=$_GET['id'];
-        $qry= "select * from dichvu where id='$id'";
-        $result=mysqli_query($con,$qry);
-        while($row=mysqli_fetch_array($result)){
-    ?> 
+<?php $page='suacongviec'; include '../includes/sidebar.php'?>
+<?php
+    $id = $_GET['id'];
+    $qry = "SELECT * FROM congviec WHERE idCv='$id'";
+    $result = mysqli_query($con, $qry);
+    while ($row = mysqli_fetch_array($result)) {
+?> 
 
 <div id="content">
 <div id="content-header">
-  <div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom"><i class="fas fa-home"></i>Trang chủ</a> <a href="#" class="tip-bottom">dịch vụ</a> <a href="#" class="current">Quản lý dịch vụ</a> </div>
-  <h1>Bảng chi tiết dịch vụ</h1>
+  <div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom"><i class="fas fa-home"></i>Trang chủ</a> <a href="#" class="tip-bottom">công việc</a> <a href="#" class="current">Quản lý công việc</a> </div>
+  <h1>Bảng chi tiết công việc</h1>
 </div>
 <div class="container-fluid">
   <hr>
-  <div class="row-fluid" style="display: flex;
-  justify-content: center;
-  align-items: center;">
+  <div class="row-fluid" style="display: flex; justify-content: center; align-items: center;">
     <div class="span6">
       <div class="widget-box">
         <div class="widget-title"> <span class="icon"> <i class="fas fa-align-justify"></i> </span>
-          <h5>Thông tin dịch vụ</h5>
+          <h5>Thông tin công việc</h5>
         </div>
         <div class="widget-content nopadding">
           <form action="xuly.php" method="POST" class="form-horizontal">
             <div class="control-group">
-              <label class="control-label">Tên dịch vụ :</label>
+              <label class="control-label">Tên công việc :</label>
               <div class="controls">
-                <input type="text" class="span11" name="Tendv" value='<?php echo $row['Tendv']; ?>' required />
+                <input type="text" class="span11" name="TenCV" value='<?php echo $row['TenCV']; ?>' required />
               </div>
             </div>
             <div class="control-group">
               <label class="control-label">Chi tiết :</label>
               <div class="controls">
-                <input type="text" class="span11" name="Gia" value='<?php echo $row['Gia']; ?>' required />
+                <input type="text" class="span11" name="Tratien" value='<?php echo $row['Tratien']; ?>' required />
               </div>
             </div>
             <div class="form-actions text-center">
-             <input type="hidden" name="id" value="<?php echo $row['id'];?>">
-              <button type="submit" class="btn btn-success">Sửa thông tin dịch vụ</button>
+              <input type="hidden" name="id" value="<?php echo $row['idCv']; ?>">
+              <button type="submit" class="btn btn-success">Sửa thông tin công việc</button>
             </div>
             </form>
 
@@ -106,9 +104,9 @@ header('location:../index.php');
 <script src="../../style/js/matrix.tables.js"></script> 
 
 <script type="text/javascript">
-  function goPage (newURL) {
+  function goPage(newURL) {
       if (newURL != "") {
-          if (newURL == "-" ) {
+          if (newURL == "-") {
               resetMenu();            
           }         
           else {  
@@ -116,9 +114,9 @@ header('location:../index.php');
           }
       }
   }
-function resetMenu() {
-   document.gomenu.selector.selectedIndex = 2;
-}
+  function resetMenu() {
+     document.gomenu.selector.selectedIndex = 2;
+  }
 </script>
 </body>
 </html>

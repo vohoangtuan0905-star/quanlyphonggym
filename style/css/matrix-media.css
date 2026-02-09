@@ -80,3 +80,117 @@ div.tagsinput input { width:80px; margin:0px; font-family: helvetica; font-size:
 div.tagsinput div { display:block; float: left; } 
 .tags_clear { clear: both; width: 100%; height: 0px; }
 .not_valid {background: #FBD8DB !important; color: #90111A !important;}
+
+/* Responsive overrides for forms on small screens
+   - Stack label + control for .form-horizontal
+   - Make .form-control full width
+   - Make action buttons easier to tap (full width blocks)
+   - Fix search/form pull-right to be full width on phones
+*/
+@media (max-width: 767px) {
+	/* Stack form-horizontal groups */
+	.form-horizontal .control-group,
+	.form-horizontal .form-group { display: block; width: 100%; margin-bottom: 14px; }
+
+	/* Labels above inputs */
+	.form-horizontal .control-label,
+	.form-horizontal label { float: none !important; display: block; width: 100% !important; margin: 0 0 6px 0; text-align: left; }
+
+	/* Controls full width */
+	.form-horizontal .controls,
+	.form-horizontal .form-actions,
+	.form-horizontal .col-md-*,
+	.form-horizontal .col-sm-* { width: 100% !important; float: none !important; }
+
+	/* Inputs/selects take full width */
+	input[type="text"], input[type="email"], input[type="password"], textarea, select, .form-control {
+		width: 100% !important; max-width: 100% !important; box-sizing: border-box; margin-bottom: 8px;
+	}
+
+	/* Buttons: make them easier to tap on phones */
+	.form-actions .btn,
+	.btn { display: block; width: 100% !important; margin: 6px 0; }
+
+	/* If buttons are grouped (btn-group), stack them */
+	.btn-group { display: block; width: 100%; }
+	.btn-group .btn { display: block; width: 100%; }
+
+	/* Input group: place button under input if present */
+	.input-group { display: block; width: 100%; }
+	.input-group .form-control { width: 100% !important; display: block; }
+	.input-group .input-group-btn { width: 100%; display: block; margin-top:6px; }
+
+	/* Search forms and floated helpers: remove floats on small screens */
+	.form-search.pull-right, .pull-right { float: none !important; display: block !important; width: 100% !important; margin: 8px 0; }
+	.pull-left { float: none !important; }
+
+	/* Tags input should adapt */
+	div.tagsinput { width: 100% !important; }
+
+	/* Quick actions should become single-column */
+	.quick-actions_homepage .quick-actions li { min-width: 100% !important; }
+
+	/* Reduce padding for compact mobile layout */
+	.form-actions { padding-top: 6px; padding-bottom: 6px; }
+}
+
+/* Extra small phones: increase touch targets */
+@media (max-width: 480px) {
+	.form-actions .btn, .btn { padding: 12px 10px; font-size: 16px; }
+	label { font-size: 14px; }
+}
+
+/* Fix mobile layout overflow and make charts responsive */
+@media (max-width: 767px) {
+	/* Hide sidebar to give content full width on small screens */
+	#sidebar { display: none !important; width: 0 !important; }
+
+	/* Ensure content area takes full width */
+	#content, .container-fluid { width: 100% !important; margin: 0 auto !important; padding-left: 8px; padding-right: 8px; box-sizing: border-box; }
+
+	/* Stack old Bootstrap 2 span* columns into single column */
+	.row-fluid [class*="span"], .span12, .span11, .span10, .span9, .span8, .span7, .span6, .span5, .span4, .span3, .span2, .span1 {
+		display: block !important;
+		float: none !important;
+		width: 100% !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+
+	/* Make chart divs responsive even if inline width present */
+	#top_x_div, #top_y_div, #piechart, .chart, .widget-content [id^="top_"] {
+		width: 100% !important;
+		max-width: 100% !important;
+		height: auto !important;
+		box-sizing: border-box !important;
+	}
+
+	/* If charts render as canvas or svg, force them to scale */
+	#top_x_div canvas, #top_y_div canvas, #top_x_div svg, #top_y_div svg, #piechart svg, #piechart canvas {
+		width: 100% !important;
+		height: auto !important;
+	}
+
+	/* Prevent fixed-width inline styles from causing horizontal scroll */
+	.widget-content [style*="width:"] { max-width: 100% !important; width: 100% !important; }
+
+	/* Make widget boxes and their inner content flow naturally */
+	.widget-box, .widget-content { width: 100% !important; overflow: visible !important; }
+
+	/* Avoid body-level horizontal scroll due to large charts or elements */
+	html, body { overflow-x: hidden; }
+}
+
+	/* Helper class to convert existing inline-width controls to responsive behavior
+		 - Keeps a reasonable max-width on large screens (matches common inline values)
+		 - Becomes full-width on small screens due to earlier input selectors
+	*/
+	.responsive-inline {
+		max-width: 350px;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	@media (max-width: 767px) {
+		.responsive-inline { max-width: 100% !important; }
+	}

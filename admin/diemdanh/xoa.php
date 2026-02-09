@@ -29,6 +29,5 @@ window.location="diemdanh/index.php";
 </script>
 <?php
 }
-
-
-  -->
+?> --><?php
+session_start();

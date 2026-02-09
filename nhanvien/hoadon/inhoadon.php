@@ -128,12 +128,20 @@ $ghichu = $row['ghichu'];
                 <h1>Hóa đơn</h1>
                 <p>Ngày thanh toán: <?php echo $ngaythanhtoan; ?></p>
             </div>
-            <img src="../../style/img/demo/anime.jpg" style ="witdh:100px; height:100px" alt="Logo">
+            <img src="../../style/img/demo/anime.jpg" style="width:100px; height:100px" alt="Logo">
         </div>
+        
         <div class="customer-info">
             <div>
+                <h3>Thông tin phòng tập</h3>
+                <p><strong>Gym Hoàng Tuấn</strong></p>
+                <p>Địa chỉ: Hồ Chí Minh</p>
+                <p>SĐT: 0818940765</p>
+                <p>Email: hoangtuan1234@gmail.com</p>
+            </div>
+            <div>
                 <h3>Thông tin khách hàng</h3>
-                <p><?php echo $Hoten; ?></p>
+                <p><strong><?php echo $Hoten; ?></strong></p>
             </div>
         </div>
         <table class="table">

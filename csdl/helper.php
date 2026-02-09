@@ -1,46 +1,64 @@
 <?php
-require_once ('dbcon.php');
+require_once('dbcon.php');
 
-$con = new mysqli(HOST, USERNAME, PASSWORD, DATABASE);
+// Tạo kết nối một lần và sử dụng lại
+function getConnection() {
+    static $conn = null;
+    if ($conn === null) {
+        $conn = new mysqli(HOST, USERNAME, PASSWORD, DATABASE);
+        if ($conn->connect_error) {
+            die("Kết nối thất bại: " . $conn->connect_error);
+        }
+        $conn->set_charset("utf8");
+    }
+    return $conn;
+}
+
+$con = getConnection();
 
 function execute($sql) {
-	//save data into table
-	// open connection to database
-	$con = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
-	//insert, update, delete
-	mysqli_query($con, $sql);
-
-	//close connection
-	mysqli_close($con);
+    $con = getConnection();
+    try {
+        $result = $con->query($sql);
+        if (!$result) {
+            throw new Exception("Lỗi SQL: " . $con->error);
+        }
+        return $result;
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return false;
+    }
 }
 
 function executeResult($sql) {
-	//save data into table
-	// open connection to database
-	$con = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
-	//insert, update, delete
-	$result = mysqli_query($con, $sql);
-	$data   = [];
-	while ($row = mysqli_fetch_array($result, 1)) {
-		$data[] = $row;
-	}
-
-	//close connection
-	mysqli_close($con);
-
-	return $data;
+    $con = getConnection();
+    try {
+        $result = $con->query($sql);
+        if (!$result) {
+            throw new Exception("Lỗi SQL: " . $con->error);
+        }
+        $data = [];
+        while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+            $data[] = $row;
+        }
+        return $data;
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return [];
+    }
 }
 
 function executeSingleResult($sql) {
-	//save data into table
-	// open connection to database
-	$con = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
-	//insert, update, delete
-	$result = mysqli_query($con, $sql);
-	$row    = mysqli_fetch_array($result, 1);
-
-	//close connection
-	mysqli_close($con);
-
-	return $row;
+    $con = getConnection();
+    try {
+        $result = $con->query($sql);
+        if (!$result) {
+            throw new Exception("Lỗi SQL: " . $con->error);
+        }
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        return $row;
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return null;
+    }
 }
